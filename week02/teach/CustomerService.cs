@@ -67,10 +67,16 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        // if (_queue.Count > _maxSize) {
+        //     Console.WriteLine("Maximum Number of Customers in Queue.");
+        //     return;
+        // }
+
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
-        }
+}
+
 
         Console.Write("Customer Name: ");
         var name = Console.ReadLine()!.Trim();
@@ -87,11 +93,23 @@ public class CustomerService {
     /// <summary>
     /// Dequeue the next customer and display the information.
     /// </summary>
+    // private void ServeCustomer() {
+    //     _queue.RemoveAt(0);
+    //     var customer = _queue[0];
+    //     Console.WriteLine(customer);
+    // }
+
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+    if (_queue.Count == 0) {
+        Console.WriteLine("No customers to serve.");
+        return;
     }
+
+    var customer = _queue[0];
+    _queue.RemoveAt(0);
+    Console.WriteLine(customer);
+}
+
 
     /// <summary>
     /// Support the WriteLine function to provide a string representation of the
